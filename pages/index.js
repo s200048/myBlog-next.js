@@ -1,14 +1,12 @@
 import Head from "next/head";
 import { Categories, PostCard, PostWidget } from "../components";
-import { getPosts } from "../services";
 
-// Demo post
-// const posts = [
-//   { title: "React Testing", excerpt: "Learn React Testing" },
-//   { title: "React with Tailwind", excerpt: "Learn React Testing" },
-// ];
+const posts = [
+  { title: "React Testing", excerpt: "Learn React Testing" },
+  { title: "React with Tailwind", excerpt: "Learn React Testing" },
+];
 
-export default function Home({ posts }) {
+export default function Home() {
   return (
     <div className="container mx-auto px-10 mb-8 bg-gray-300">
       <Head>
@@ -30,19 +28,11 @@ export default function Home({ posts }) {
         </div>
       </div>
 
-      {/* <a href="https://www.youtube.com/watch?v=HYv55DhgTuA&t=4170s&ab_channel=JavaScriptMastery">
+      <a href="https://www.youtube.com/watch?v=HYv55DhgTuA&t=4170s&ab_channel=JavaScriptMastery">
         https://www.youtube.com/watch?v=HYv55DhgTuA&t=4170s&ab_channel=JavaScriptMastery
-      </a> */}
+      </a>
     </div>
   );
-}
-
-export async function getStaticProps() {
-  const posts = (await getPosts()) || [];
-
-  return {
-    props: { posts },
-  };
 }
 
 //flex flex-col items-center justify-center min-h-screen py-

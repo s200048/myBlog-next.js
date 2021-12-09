@@ -1,7 +1,7 @@
 import React from "react";
 import { Header } from "./";
 
-// 每個react props 都會有children props
+// 每個react props 都會希children props
 {
   /* <Abc>
     This call children
