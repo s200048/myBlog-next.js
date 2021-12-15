@@ -35,31 +35,33 @@ export const getPosts = async () => {
   `;
 
   const results = await request(graphqlAPI, query);
-  //   console.log("This is results" + results);
+  // console.log(results);
   return results.postsConnection.edges;
 };
 
-// export const getRecentPosts = async () => {
-//   const query = gql`
-//     query GetPostDetails() {
-//         posts(
-//             orderBy: createdAt_ASC
-//             last: 3
-//         ) {
-//             title
-//             featuredImage {
-//                 url
-//             }
-//             createdAt
-//             slug
-//         }
-//     }
-//     `;
+// getPosts();
 
-//   const result = await request(graphqlAPI, query);
-//   // console.log(result);
-//   return result.posts;
-// };
+export const getRecentPosts = async () => {
+  const query = gql`
+    query GetPostDetails() {
+        posts(
+            orderBy: createdAt_ASC
+            last: 3
+        ) {
+            title
+            featuredImage {
+                url
+            }
+            createdAt
+            slug
+        }
+    }
+    `;
+
+  const result = await request(graphqlAPI, query);
+  // console.log(result);
+  return result.posts;
+};
 
 // export const getSimilarPosts = async (categories, slug) => {
 //   // query language $slug --> type = string
@@ -90,47 +92,42 @@ export const getPosts = async () => {
 
 // Answer
 
-export const getSimilarPosts = async (categories, slug) => {
-  const query = gql`
-    query GetPostDetails($slug: String!, $categories: [String!]) {
-      posts(
-        where: {
-          slug_not: $slug
-          AND: { categories_some: { slug_in: $categories } }
-        }
-        last: 3
-      ) {
-        title
-        featuredImage {
-          url
-        }
-        createdAt
-        slug
-      }
-    }
-  `;
-  const result = await request(graphqlAPI, query, { slug, categories });
+// export const getSimilarPosts = async (categories, slug) => {
+//   const query = gql`
+//     query GetPostDetails($slug: String!, $categories: [String!]) {
+//       posts(
+//         where: {
+//           slug_not: $slug
+//           AND: { categories_some: { slug_in: $categories } }
+//         }
+//         last: 3
+//       ) {
+//         title
+//         featuredImage {
+//           url
+//         }
+//         createdAt
+//         slug
+//       }
+//     }
+//   `;
+//   const result = await request(graphqlAPI, query, { slug, categories });
 
-  return result.posts;
-};
+//   return result.posts;
+// };
 
-export const getRecentPosts = async () => {
-  const query = gql`
-    query GetPostDetails() {
-      posts(
-        orderBy: createdAt_ASC
-        last: 3
-      ) {
-        title
-        featuredImage {
-          url
-        }
-        createdAt
-        slug
-      }
-    }
-  `;
-  const result = await request(graphqlAPI, query);
+// export const getRecentPosts = async () => {
+//   const query = gql`
+//     query findSlug {
+//       posts {
+//         slug
+//       }
+//     }
+//   `;
+//   const result = await request(graphqlAPI, query);
+//   // console.log(result);
 
-  return result.posts;
-};
+//   return result.posts;
+// };
+// getRecentPosts();
+// getRecentPosts().catch((err) => console.log(err));

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Categories, PostCard, PostWidget } from "../components";
-import { getPosts } from "../services";
+import { getPosts, getRecentPosts } from "../services";
 
 // Demo post
 // const posts = [
@@ -9,7 +9,7 @@ import { getPosts } from "../services";
 // ];
 
 // 係下邊拎到fetch data 之後，就可以拎個props 嚟做components
-export default function Home({ posts }) {
+export default function Home({ posts, slug }) {
   return (
     <div className="container mx-auto px-10 mb-8 bg-gray-300">
       <Head>
@@ -25,7 +25,7 @@ export default function Home({ posts }) {
         </div>
         <div className="lg:col-span-4 col-span-1 ">
           <div className="lg:sticky relative top-8">
-            <PostWidget />
+            <PostWidget slug={slug} />
             <Categories />
           </div>
         </div>
@@ -43,11 +43,20 @@ export default function Home({ posts }) {
 export async function getStaticProps() {
   // 如果拎唔到啲data ， 就empty array --> 好似function + condition?
   const posts = (await getPosts()) || [];
+  const slug = await getRecentPosts();
 
   // 拎到data 之後再return 出去 as a props
   return {
-    props: { posts },
+    props: { posts, slug },
   };
 }
 
 // 拎到data 重未夠，重要係 GraphQL setting --> API setting 到加返個permission 入去，令到可以read
+
+// export async function getStaticProps() {
+//   const slug = await getRecentPosts();
+
+//   return {
+//     props: { slug },
+//   };
+// }

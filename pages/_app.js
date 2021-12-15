@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <Layout />
       <Component {...pageProps} />
-      {console.log(Component)}
+      {/* {console.log(Component)} */}
     </>
   );
 }
